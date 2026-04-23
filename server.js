@@ -85,5 +85,13 @@ ${respuesta}
     }
 });
 
+// ⭐ NUEVO: Ruta para descargar el Excel
+app.get("/descargar-excel", (req, res) => {
+    if (!fs.existsSync(EXCEL_FILE)) {
+        return res.status(404).send("El archivo aún no existe.");
+    }
+    res.download(EXCEL_FILE);
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Servidor escuchando en el puerto " + PORT));
